@@ -31,6 +31,7 @@ export class Point
      * @param {number[]} value - The value of the point.
      */
     constructor(value) {
+        // --- contains the actual value of the point --- //
         this.value = value  
     }
 
@@ -131,9 +132,9 @@ export class Point
      * @param {(a: Point[], b: Point[]) : number} measure - measuring function to use
      * @returns {Point} - the farthest point in the points set
      */
-    farthestPoint(pointSet, measure = euclideanDistance) {
+    farthestPoint(pointSet, measureFn = euclideanDistance) {
         let distances = 
-            pointSet.map((otherPoint) => measure(this, otherPoint))
+            pointSet.map((otherPoint) => measureFn(this, otherPoint))
         let index = argMax(distances)
         let distance = Math.max(...distances)
         return { index, distance }
@@ -146,9 +147,9 @@ export class Point
      * @param {(a: Point[], b: Point[]) : number} measure - measuring function to use
      * @returns {Point} - the farthest point in the points set
      */
-    nearestPoint(pointSet, measure = euclideanDistance) {
+    nearestPoint(pointSet, measureFn = euclideanDistance) {
         let distances = 
-            pointSet.map((otherPoint) => measure(this, otherPoint))
+            pointSet.map((otherPoint) => measureFn(this, otherPoint))
         let index = argMin(distances)
         let distance = Math.min(...distances)
         return { index, distance }
