@@ -1,3 +1,10 @@
+/**
+ * Randomness Module
+ * --------------------------------------------------------------------------------------
+ * Module for generating random items.
+ */
+
+
 import { settings } from "../../../settings.js";
 import { currentTime } from "./clock.js";
 import Chance from "chance"
@@ -47,7 +54,7 @@ export function randomFloating({
 }
 
 /**
- * Picks multiple elements from an array of values. D
+ * Picks multiple elements from an array of values. 
  * @param {any[]}  options.array - array of values to select value from.
  * @param {number} options.k - the number of element to select.
  * @param {any}    options.generator - the generator to use 
@@ -58,4 +65,22 @@ export function pickFromArray({
     generator = createGenerator(currentTime())
 }) {
     return generator.pick(array, k)
+} 
+
+/**
+ * Generates a random array of floating point from 0 to 1.
+ * 
+ * @param {any[]}  options.array - array of values to select value from.
+ * @param {number} options.k - the number of element to select.
+ * @param {any}    options.generator - the generator to use 
+ */
+export function randomNumbers({
+    count = 5,
+    generator = createGenerator(currentTime())
+}) {
+    const items = [] 
+    for(let i = 0; i < count; i++) {
+        items.push(randomFloating({ min: -1, max: 1, generator }))
+    }
+    return items
 } 
