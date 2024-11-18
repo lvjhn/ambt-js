@@ -6,6 +6,8 @@
 import { settings } from "../../../settings.js"
 import { createGenerator, randomFloating } from "./random.js"
 import { dotProduct } from "./vectors.js"
+import { euclideanDistance } from "./measures.js"
+import { argMin, argMax } from "./helpers.js"
 
 export class Point
 {
@@ -70,7 +72,7 @@ export class Point
         return (
             new Array(count)
                 .fill(null)
-                .map((v, i) => Point.random())
+                .map((v, i) => Point.random(dimCount))
         )
     }
 
@@ -129,7 +131,26 @@ export class Point
      * @param {(a: Point[], b: Point[]) : number} measure - measuring function to use
      * @returns {Point} - the farthest point in the points set
      */
-    farthestPoint(point, pointSet, measure) {
-        return maxIndex, maxDistance
+    farthestPoint(pointSet, measure = euclideanDistance) {
+        let distances = 
+            pointSet.map((otherPoint) => measure(this, otherPoint))
+        let index = argMax(distances)
+        let distance = Math.max(...distances)
+        return { index, distance }
+    }
+
+    /** 
+     * Returns the nearest point from a point in given set of points. 
+     * @param {Point} point - the point to consider 
+     * @param {Point[]} pointSet - array (set) of points to look up
+     * @param {(a: Point[], b: Point[]) : number} measure - measuring function to use
+     * @returns {Point} - the farthest point in the points set
+     */
+    nearestPoint(pointSet, measure = euclideanDistance) {
+        let distances = 
+            pointSet.map((otherPoint) => measure(this, otherPoint))
+        let index = argMin(distances)
+        let distance = Math.min(...distances)
+        return { index, distance }
     }
 } 

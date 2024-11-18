@@ -37,15 +37,27 @@ console.log(`\tProjection: ${projectionB}`)
 
 console.log() 
 
-console.log(`Finding farthest points.`) 
-const keyPoint = Point.random() 
-const pointSet = Point.randomSet(5)
-console.log(`\tKey Point: ${keyPoint}`)
+console.log(`Finding farthest point.`) 
+const keyPointA = Point.random() 
+const pointSetA = Point.randomSet(5)
+console.log(`\tKey Point: ${keyPointA}`)
 console.log(`\tPoint Set:`)
-for(let i in pointSet) {
-    console.log(`\t\t#${i} = ${pointSet[i].toString()}`)
+for(let i in pointSetA) {
+    console.log(`\t\t#${i} = ${pointSetA[i].toString()}`)
 } 
-console.log(`\tFarthest Point:`)
+console.log(`\tFarthest Point: #${keyPointA.farthestPoint(pointSetA).index + 1}`)
+
+
+console.log(`Finding nearest point.`) 
+const keyPointB = Point.random() 
+const pointSetB = Point.randomSet(5)
+console.log(`\tKey Point: ${keyPointB}`)
+console.log(`\tPoint Set:`)
+for(let i in pointSetB) {
+    console.log(`\t\t#${i} = ${pointSetB[i].toString()}`)
+} 
+console.log(`\tNearest Point: #${keyPointB.nearestPoint(pointSetB).index + 1}`)
+
 
 
 

@@ -54,3 +54,17 @@ export function dotProduct(A, B) {
     return dotTotal
 }
 
+
+/**
+ * Computes the cosine similarity between two vectors. 
+ * 
+ * @param {Point} A - the first vector 
+ * @param {Point} B - the second vector 
+ */
+export function cosineSimilarity(A, B) {
+    const dotProduct_ = dotProduct(A, B) 
+    const magnitudeA  = magnitude(A) 
+    const magnitudeB  = magnitude(B) 
+    const similarity  = dotProduct_ / (magnitudeA * magnitudeB)
+    return similarity
+}
