@@ -24,6 +24,21 @@ export function euclideanDistance(A, B) {
 }
 
 /**
+ * Computes the squared euclidean distance between two points.
+ * @param {Point} A - the first point 
+ * @param {Point} B - the second point
+ */
+export function squaredEuclideanDistance(A, B) {
+    let total = 0 
+    for(let i = 0; i < A.dimCount(); i++) {
+        const AB = A.at(i) - B.at(i)
+        const ABAB = AB * AB
+        total += ABAB
+    } 
+    return total
+}
+
+/**
  * Computes the manhattan distance between two points.
  * @param {Point} A - the first point 
  * @param {Point} B - the second point

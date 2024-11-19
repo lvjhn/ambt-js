@@ -2,7 +2,7 @@ import { PointRepository } from "../../../src/core/utils/project/point-repositor
 import { Point } from "../../../src/core/utils/project/point.js";
 
 console.log("Generating points.") 
-const points = Point.randomSet({ count: 100000 }) 
+const points = Point.randomSet({ count: 300000 }) 
 // for(let i in points) {
 //     i = parseInt(i)
 //     console.log(`\t#${i + 1} = ${points[i].toString()}`)
@@ -17,3 +17,12 @@ const pointRepository = new PointRepository({
 })
 
 await pointRepository.save()
+
+console.log() 
+
+console.log("Normalizing points.")
+console.log(`\tBefore normalization: ${pointRepository.get(0)}`)
+
+pointRepository.normalize()
+
+console.log(`\tAfter normalization : ${pointRepository.get(0)}`)

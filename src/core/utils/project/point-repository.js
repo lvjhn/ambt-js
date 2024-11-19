@@ -11,6 +11,7 @@ import {
     arrayToBytes_float32,
     bytesToArray_float32
  } from "../common/helpers.js";
+import { normalize } from "./vectors.js";
 
 export class PointRepository 
 {
@@ -169,5 +170,23 @@ export class PointRepository
         throw new Error(
             "Length is not defined on PointRepository object, use size() instead."
         )
+    }
+
+    /** 
+     * Normalizes each of the point in the point set.
+     */
+    normalize() {
+        const points = this.points
+        for(let i = 0; i < points.length; i++) {
+            const point = points[i] 
+            points[i].value = normalize(point).value
+        }    
+    }
+
+    /** 
+     * Gets all points in the repository.
+     */
+    all() {
+        return this.points
     }
 }

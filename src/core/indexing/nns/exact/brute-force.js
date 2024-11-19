@@ -6,7 +6,7 @@
 import { Indexer } from "../../indexer.js";
 import { Benchmarker } from "../../../utils/common/benchmark.js";
 
-export class BruteForceNNS extends Indexer
+export class BruteForceNSS extends Indexer
 {
     constructor(options) {
         // --- initialize parent class --- //
@@ -87,10 +87,19 @@ export class BruteForceNNS extends Indexer
         // --- compute distance of each point to target --- //
         for(let i = 0; i < points.size(); i++) {
             const otherPoint = points.get(i)
-            const distance = this.measure(target, otherPoint)
+            const radius = this.getRadius(otherPoint)
+            const distance = this.measure(target, otherPoint) - radius 
             distances.push({ point: otherPoint, distance })
         }
 
         return distances
+    }
+
+    /** 
+     * Gets the radius of a given points.
+     * @param {Point} point - point to get the radius of.
+     */
+    getRadius(point) {
+        return point.data.radius
     }
 }

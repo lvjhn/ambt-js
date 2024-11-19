@@ -43,6 +43,9 @@ export class Point
 
         // --- register current point in the point space --- //
         this.index = index
+
+        // --- container for data of points --- // 
+        this.data = null
     }
 
     /** 

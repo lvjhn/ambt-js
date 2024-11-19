@@ -6,6 +6,7 @@
 import { PointRepository } from "../utils/project/point-repository.js"
 import { indent } from "../utils/common/helpers.js"
 import { Logger } from "../utils/common/logger.js"
+import { euclideanDistance } from "../utils/project/measures.js"
 
 export class Indexer 
 {
@@ -14,8 +15,12 @@ export class Indexer
 
     /**
      * @param {Object} options - options object 
+     * @param {Function} options.measure - measurement/metric function to use
      */
     constructor(options = {}) {
+        // --- measurement/metric function to use --- /
+        this.measure = options.measure ?? euclideanDistance
+
         // --- logger object --- //
         this.logger = new Logger(this)
     }
@@ -32,7 +37,7 @@ export class Indexer
         if(!(points instanceof PointRepository)) {
             throw new Error("The arguments `points` must be a PointRepository object.")
         }        
-        this.point = points
+        this.points = points
     }   
 
     /**
