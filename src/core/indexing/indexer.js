@@ -53,7 +53,9 @@ export class Indexer
      * Constructs the indexer, must be implemented by child clsas.
      */
     construct() {
+        this.logger.indent += 1
         this.logger.log("construct() : Must be implemented by child object.")
+        this.logger.indent -= 1
     }
 
     /** 
@@ -67,7 +69,9 @@ export class Indexer
      * @param {mode} mode - whether Indexer.NEAREST or Indexer.FARTHEST
      */
     query(target, k, mode = Indexer.NEAREST) {
-        this.logger.log("construct() : Must be implemented by child object.")
+        this.logger.indent += 1
+        this.logger.log("query() : Must be implemented by child object.")
+        this.logger.indent -= 1
     }
 
 }
