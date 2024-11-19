@@ -12,7 +12,7 @@ import { arrayAdd } from "../common/helpers.js"
 export class KMeans 
 {   
     /**
-     * @param {*} options - options object 
+     * @param {Object} options - options object 
      * @param {number} centroidCount - no. of centroids to assign 
      * @param {boolean} options.verbose - whether to display log messages 
      * @param {indent} options.indentation - indentation level of log messages

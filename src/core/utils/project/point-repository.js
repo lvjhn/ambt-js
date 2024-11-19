@@ -15,7 +15,7 @@ import {
 export class PointRepository 
 {
     /**
-     * @param {*} options - options object 
+     * @param {Object} options - options object 
      * @param {Point[]} - array of points to store
      */
     constructor({

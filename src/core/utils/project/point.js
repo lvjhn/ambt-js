@@ -34,7 +34,7 @@ export class Point
 
     /**
      * @param {number[]} value - The value of the point.
-     * @param {*} options - options object 
+     * @param {Object} options - options object 
      * @param {number} index - index of the point for reverse look-up (optional)
      */
     constructor(value, { index = 0 } = {}) {
