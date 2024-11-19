@@ -74,7 +74,7 @@ export class KMeans
      * Check no. of points 
      */
     checkPointCount() {
-        if(this.points.length < 0) {
+        if(this.points.size() < 0) {
             throw new Error("No. of points must be greater than centroids.")
         }
     }
@@ -94,7 +94,7 @@ export class KMeans
     fit(iterCount) {
         for(let i = 0; i < iterCount; i++) {
             if(this.verbose) {
-                console.log(`${indent(this.indent)}Fitting ${i} of ${iterCount}.`)
+                console.log(`${indent(this.indent)}Fitting ${i + 1} of ${iterCount}.`)
             }
             this.fitOne()
         }
@@ -204,5 +204,31 @@ export class KMeans
         this.centroids = centroids
     }   
 
+    /** 
+     * Extracts and points to clusters as a 2D array.
+     */
+    extractClusters() {
+        // --- create empty clusters --- // 
+        const clusters = new Array(this.centroidCount).fill([]) 
+
+        // --- localize points --- //
+        const points = this.points
+
+        // --- localize cluster assignments --- /
+        const clusterAssignments = this.assignments
+
+        // ---
+        // loop through each point and 
+        // find out which cluster they belong to
+        // ---
+        
+        for(let i = 0; i < points.size(); i++) {
+            const clusterIndex = clusterAssignments[i] 
+            const point = points.get(i)
+            clusters[clusterIndex].push(point)
+        }
+
+        return clusters
+    }
 }
 

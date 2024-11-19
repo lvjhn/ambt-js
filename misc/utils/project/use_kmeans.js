@@ -16,7 +16,9 @@ const kmeans = new KMeans({
 })
 
 
-for(let i = 0; i < 10; i++) {
-    kmeans.fitOne()
-    console.log(kmeans.centroids[0])
-}
+kmeans.fit(10)
+
+const clusters = kmeans.extractClusters()
+
+
+console.log(clusters)

@@ -161,4 +161,13 @@ export class PointRepository
             })
         })
     }
+
+    /**s 
+     * Error on length to avoid confusion with size()
+     */
+    get length() {
+        throw new Error(
+            "Length is not defined on PointRepository object, use size() instead."
+        )
+    }
 }
