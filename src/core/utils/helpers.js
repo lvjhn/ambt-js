@@ -35,3 +35,27 @@ export function median(values, comparator = (a, b) => a[i] - b[i]) {
     const medianIndex = Math.floor(values.length / 2)
     return valuesCopy[medianIndex]
 }
+
+/** 
+ * Repeats a string n-times. 
+ * @param {string} str - the string to repeat 
+ * @param {number} repeats - the number of times to repeat the string
+ * @returns {string} - the final string
+ */
+export function repeatStr(str, repeats) {
+    let finalStr = "" 
+    for(let i = 0; i < repeats; i++) {
+        finalStr += str
+    }
+    return finalStr
+}
+
+
+/** 
+ * Indents using 4 spaces n times.
+ * @param {number} times - no. of times to indent 
+ * @returns {string} - indentation string
+ */
+export function indent(times) {
+    return repeatStr("    ", times)
+}
