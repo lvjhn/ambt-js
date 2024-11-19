@@ -75,7 +75,7 @@ export class Heap {
 
     /**
      * Adds an element to the heap. 
-     * @param {any} value 
+     * @param {*} value 
      */
     push(value) {
         this.data.push(value)
@@ -84,7 +84,7 @@ export class Heap {
 
     /**
      * Removes the current topmost element in the heap and returns it.
-     * @returns {any} 
+     * @returns {*} 
      */
     pop() {
         if(this.size() == 0) {

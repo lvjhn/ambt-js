@@ -1,6 +1,6 @@
-import { createGenerator, randomNumbers } from "../../src/core/utils/random.js";
-import { Heap } from "../../src/core/utils/heap.js";
-import { Point } from "../../src/core/utils/point.js";
+import { createGenerator, randomNumbers } from "../../../src/core/utils/common/random.js";
+import { Heap } from "../../src/core/utils/project/heap.js";
+import { Point } from "../../../src/core/utils/project/point.js";
 
 // --- create generator --- // 
 console.log("Creating generator.")

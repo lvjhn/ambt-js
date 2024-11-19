@@ -3,11 +3,11 @@
  * --------------------------------------------------------------------------------------
  * Represents a point in 2 dimensional space.
  */
-import { settings } from "../../../settings.js"
-import { createGenerator, randomFloating } from "./random.js"
+import { settings } from "../../../../settings.js"
+import { createGenerator, randomFloating } from "../common/random.js"
 import { dotProduct } from "./vectors.js"
 import { euclideanDistance } from "./measures.js"
-import { argMin, argMax } from "./helpers.js"
+import { argMin, argMax } from "../common/helpers.js"
 
 export class Point
 {
@@ -26,13 +26,42 @@ export class Point
      */
     static generateMax = 10
 
+    /** 
+     * Collection of all points. 
+     */
+    static pointSpace  = {} 
+    static idCounter = 0
 
     /**
      * @param {number[]} value - The value of the point.
+     * @param {*} options - options object 
+     * @param {number} index - index of the point for reverse look-up (optional)
      */
-    constructor(value) {
+    constructor(value, { index = 0 } = {}) {
         // --- contains the actual value of the point --- //
         this.value = value  
+
+        // --- register current point in the point space --- //
+        this.index = index
+    }
+
+    /** 
+     * Set the index of each point in an array of points. 
+     * @param {Point[]} points - the points to assign index with 
+     */
+    static setIndices(points) {
+        for(let i = 0; i < points.length; i++) {
+            points[i].index = i
+        }
+    }
+
+    /**
+     * Returns the points at an index in the repository.
+     * @param {number} index 
+     * @returns 
+     */
+    static getById(id) {
+        return Point.pointSpace[id]
     }
 
     /**
@@ -132,7 +161,7 @@ export class Point
      * @param {(a: Point[], b: Point[]) : number} measure - measuring function to use
      * @returns {Point} - the farthest point in the points set
      */
-    farthestPoint(pointSet, measureFn = euclideanDistance) {
+    farthestFrom(pointSet, measureFn = euclideanDistance) {
         let distances = 
             pointSet.map((otherPoint) => measureFn(this, otherPoint))
         let index = argMax(distances)
@@ -147,11 +176,39 @@ export class Point
      * @param {(a: Point[], b: Point[]) : number} measure - measuring function to use
      * @returns {Point} - the farthest point in the points set
      */
-    nearestPoint(pointSet, measureFn = euclideanDistance) {
+    nearestFrom(pointSet, measureFn = euclideanDistance) {
         let distances = 
             pointSet.map((otherPoint) => measureFn(this, otherPoint))
         let index = argMin(distances)
         let distance = Math.min(...distances)
         return { index, distance }
+    }
+
+    /** 
+     * Gets the centroid of a set of points.
+     * @param {Points[]} - array of points 
+     * @returns {Point} - centroid of the given points
+     */
+    static centroid(points) {
+        // --- initialize center --- //
+        const center = []
+        const dimCount = points[0].dimCount()
+        for(let i = 0; i < dimCount; i++) {
+            center.push(0) 
+        }
+
+        // --- add points --- //
+        for(let i = 0; i < points.length; i++) {
+            for(let j = 0; j < dimCount; j++) {
+                center[j] = points[i].at(j)
+            }
+        }
+
+        // --- get center (average) --- //
+        for(let i = 0; i < dimCount; i++) {
+            center[i] = center[i] / points.length
+        }
+
+        return new Point(center)
     }
 } 

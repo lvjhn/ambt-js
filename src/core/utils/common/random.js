@@ -5,8 +5,8 @@
  */
 
 
-import { settings } from "../../../settings.js";
-import { currentTime } from "./clock.js";
+import { settings } from "../../../../settings.js";
+import { currentTime } from "../common/clock.js";
 import Chance from "chance"
 
 /**
@@ -24,7 +24,7 @@ export function createGenerator(seed = settings.random.defaultSeed) {
  * @param {Object} options - Options to use.
  * @param {number} options.min - minimum value. 
  * @param {number} options.max - maximum value
- * @param {any}    options.generator 
+ * @param {*}    options.generator 
  *      The generator to use (must implement .integer({ min, max}))
  */
 export function randomInteger({ 
@@ -42,7 +42,7 @@ export function randomInteger({
  * @param {Object} options - options to use.
  * @param {number} options.min - minimum value. 
  * @param {number} options.max - maximum value.
- * @param {any}    options.generator 
+ * @param {*}    options.generator 
  *      the generator to use (must implement .integer({ min, max}))
  */
 export function randomFloating({
@@ -57,7 +57,7 @@ export function randomFloating({
  * Picks multiple elements from an array of values. 
  * @param {any[]}  options.array - array of values to select value from.
  * @param {number} options.k - the number of element to select.
- * @param {any}    options.generator - the generator to use 
+ * @param {*}    options.generator - the generator to use 
  */
 export function pickFromArray({
     array = [],
@@ -72,7 +72,7 @@ export function pickFromArray({
  * 
  * @param {any[]}  options.array - array of values to select value from.
  * @param {number} options.k - the number of element to select.
- * @param {any}    options.generator - the generator to use 
+ * @param {*}    options.generator - the generator to use 
  */
 export function randomNumbers({
     count = 5,

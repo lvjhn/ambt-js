@@ -1,7 +1,7 @@
-import { Point } from "../../src/core/utils/point.js";
+import { Point } from "../../../src/core/utils/project/point.js";
 
 console.log("Creating point.")
-const customPoint = new Point([1.0, 1.5, 2.0]) 
+const customPoint = new Point([1.0, 1.5, 2.0], { id: 0 }) 
 console.log(customPoint.toString())
 
 console.log()
@@ -14,8 +14,9 @@ console.log()
 
 console.log("Create multiple random points.")
 const randomPoints = Point.randomSet(3)
+Point.setIndices(randomPoints)
 for(let point of randomPoints) {
-    console.log(`\t${point.toString()}`)
+    console.log(`\t${point.toString()} | ${point.index}`)
 }
 
 console.log()
@@ -45,8 +46,9 @@ console.log(`\tPoint Set:`)
 for(let i in pointSetA) {
     console.log(`\t\t#${i} = ${pointSetA[i].toString()}`)
 } 
-console.log(`\tFarthest Point: #${keyPointA.farthestPoint(pointSetA).index + 1}`)
+console.log(`\tFarthest Point: #${keyPointA.farthestFrom(pointSetA).index + 1}`)
 
+console.log()
 
 console.log(`Finding nearest point.`) 
 const keyPointB = Point.random() 
@@ -56,8 +58,14 @@ console.log(`\tPoint Set:`)
 for(let i in pointSetB) {
     console.log(`\t\t#${i} = ${pointSetB[i].toString()}`)
 } 
-console.log(`\tNearest Point: #${keyPointB.nearestPoint(pointSetB).index + 1}`)
+console.log(`\tNearest Point: #${keyPointB.nerastFrom(pointSetB).index + 1}`)
 
+
+console.log()
+
+console.log(`Finding centroid of the given points.`) 
+console.log(`\tCentroid (Set A): ${Point.centroid(pointSetA)}`)
+console.log(`\tCentroid (Set B): ${Point.centroid(pointSetB)}`)
 
 
 

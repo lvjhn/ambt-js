@@ -1,4 +1,4 @@
-import { Point } from "../../src/core/utils/point.js";
+import { Point } from "../../../src/core/utils/project/point.js";
 
 import {
     magnitude, 
