@@ -1,0 +1,9 @@
+python3 -m scripts.extract.extract_word_vectord fasttext fasttext-wiki-news-subwords-300
+python3 -m scripts.extract.extract_word_vectors glove glove-twitter-25
+python3 -m scripts.extract.extract_word_vectors glove glove-twitter-50
+python3 -m scripts.extract.extract_word_vectors glove glove-twitter-100
+python3 -m scripts.extract.extract_word_vectors glove glove-twitter-200
+python3 -m scripts.extract.extract_word_vectors glove glove-wiki-gigaword-50
+python3 -m scripts.extract.extract_word_vectors glove glove-wiki-gigaword-100
+python3 -m scripts.extract.extract_word_vectors glove glove-wiki-gigaword-200
+python3 -m scripts.extract.extract_word_vectors glove glove-wiki-gigaword-300

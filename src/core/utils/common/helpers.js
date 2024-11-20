@@ -188,3 +188,17 @@ export function arraySubtract(A, B) {
     }
     return total
 }
+
+/** 
+ * Replaces file extension of a file.
+ * @param {string} fileName - file to rename 
+ * @param {string} newExt - new extension 
+ * @param {number} suffixCount 
+ *  no. of dots from the right to consider when replacing extension
+ */
+export function replaceExtension(fileName, newExt, suffixCount) {
+    const tokens = fileName.split(".") 
+    const nameParts = tokens.slice(0, tokens.length - suffixCount) 
+    const name = nameParts.join(".") + newExt
+    return name
+}
