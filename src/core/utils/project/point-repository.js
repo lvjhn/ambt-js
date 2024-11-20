@@ -22,13 +22,13 @@ export class PointRepository
     constructor({
         points       = [],
         saveLocation = `./temp/points/${currentTime()}`,
-        dimensions   = 3
+        dims         = null
     } = {}) {     
         // --- save location of the repository --- // 
         this.saveLocation = saveLocation 
-        
-        // --- number of dimensions --- //
-        this.dimensions = dimensions
+
+        // --- no. of dimensions --- // 
+        this.dims   = dims
         
         // --- array of points to store --- // 
         this.setPoints(points)
@@ -60,7 +60,7 @@ export class PointRepository
      * Gets the number of dimensions of points in the repository.
      */
     dimCount() {
-        return this.dimensions
+        return this.dims
     }
 
     /** 
@@ -82,83 +82,108 @@ export class PointRepository
     /**
      * Saves the point repository in binary format.
      * (Does not work in browser, must manually save points).
+     * 
+     * @param {Object} options - options object 
+     * @param {Function} options.onFileCreated 
+     *  called when the savefile has been created 
+     * @param {Function} options.onSavePoint 
+     *  called when a point has been appended to the savefile
+     * @param {Function} options.onBeforeClose 
+     *  called before closing the savefile
      */
-    async save({
-        onFileCreated = (outStream) => {},
-        onSavePoint = (point, index) => {}, 
-        onBeforeClose = (outStream) => {}
-    } = {}) {
-        // --- import file system (doesn't work in the browser) --- //
-        const fs = (await import("fs")).default 
+    async save({ onSavePoint = (chunk, point, index) => {} } = {}) {
+        const self = this 
 
-        // --- save location --- // 
-        const saveLocation = this.saveLocation
+        return new Promise(async (resolve, reject) => { 
+            // --- import file system (doesn't work in the browser) --- //
+            const fs = (await import("fs")).default 
 
-        // --- check if directory exists --- // 
-        const baseFolder_ = baseFolder(saveLocation) 
-        await createDirectoryIfNotExists(baseFolder_)
+            // --- save location --- // 
+            const saveLocation = self.saveLocation
 
-        // --- remove previousy saved file if it exists --- //
-        if(fs.existsSync(saveLocation)) {
-            fs.unlinkSync(saveLocation)
-        }
+            // --- check if directory exists --- // 
+            const baseFolder_ = baseFolder(saveLocation) 
+            await createDirectoryIfNotExists(baseFolder_)
 
-        // --- create write stream for points --- // 
-        const outStream = 
-            fs.createWriteStream(saveLocation, { encoding: "binary" })
+            // --- remove previousy saved file if it exists --- //
+            if(fs.existsSync(saveLocation)) {
+                fs.unlinkSync(saveLocation)
+            }
 
-        // --- iterate over each point and write each to the output stream --- // 
-        const points = this.points
-        for(let i = 0; i < points.length; i++) {
-            const point = points[i]
-            const pointValue = point.dims() 
-            onSavePoint(point, i) 
-            outStream.write(arrayToBytes_float32(pointValue))
-        }   
+            // --- iterate over each point and write each to the output stream --- // 
+            const points = this.points
+            for(let i = 0; i < points.length; i++) {
+                const point = points[i]
+                const pointValue = point.dims() 
+                const chunk = arrayToBytes_float32(pointValue)
+                onSavePoint(chunk, point, i)
+                fs.appendFileSync(saveLocation, chunk)
+            }   
 
-        onBeforeClose(outStream)
-
-        // --- close the write stream --- //
-        outStream.close() 
+            resolve(true)
+        })
     }   
     
     /**
      * Loads the point repository in binary format.
      * (Does not work in browser, must manually save points).
+     * 
+     * @param {Object} options - options object 
+     * @param {Function} options.onFileOpened 
+     *  called when the savefile has been opened 
+     * @param {Function} options.onLoadPoint 
+     *  called when a point has been loaded 
+     * @param {Function} options.onBeforeClose 
+     *  called before closing the savefile
      */
     async load({
-        onFileOpened  = (inStream) => {},
-        onLoadPoint = (point, index) => {}, 
+        onFileOpened = (inStream) => {},
+        onLoadPoint = (chunk, point, index) => {}, 
         onBeforeClose = (inStream) => {}
     } = {}) {
         let self = this 
-        this.points = []
 
         return new Promise(async (resolve, reject) =>  {
+            this.points = []
 
             // --- import file system (doesn't work in the browser) --- //
             const fs = (await import("fs")).default 
 
             // --- save location --- // 
-            const saveLocation = this.saveLocation
+            const saveLocation = self.saveLocation
 
             // --- load input file as input stream --- //
-            const chunkSize = 4 * this.dimCount()
+            const chunkSize = 4 * self.dimCount()
+
+            // --- running index --- // 
+            let i = 0 
+
+            // --- create input stream --- //
             const inStream = fs.createReadStream(saveLocation, {
-                highWaterMark: chunkSize 
+                highWaterMark: chunkSize
             })
 
+            // --- run callback function after opening file --- //
             onFileOpened(inStream)
 
             // --- read the file --- //
             inStream.on('data', (chunk) => {
                 const point = bytesToArray_float32(chunk)
                 self.points.push(new Point(point))
-                onLoadPoint(chunk)
+                onLoadPoint(chunk, point, i)
+                i += 1
+            })
+            
+            // --- close the file when stream has ended --- //
+            inStream.on('end', () => {
+                onBeforeClose(inStream)
+                inStream.close()
+                resolve(true)
             })
 
-            inStream.on('eand', () => {
-                inStream.close()
+            // --- close the file when stream has ended --- //
+            inStream.on('error', (e) => {
+                throw e
             })
         })
     }

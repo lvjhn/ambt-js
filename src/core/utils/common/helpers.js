@@ -88,7 +88,7 @@ export async function createDirectoryIfNotExists(directory) {
     if(fs.existsSync(directory)) {
        return false  
     }
-    fs.mkdirSync(directory)
+    fs.mkdirSync(directory, { recursive: true })
     return true 
 }
 

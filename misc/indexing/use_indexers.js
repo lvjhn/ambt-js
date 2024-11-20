@@ -3,10 +3,10 @@
  * ---
  * Helper class for using/checking functions indexers.
  */
-import { Point } from "../../src/core/utils/project/point.js"
-import { PointRepository } from "../../src/core/utils/project/point-repository.js"
-import { Indexer } from "../../src/core/indexing/indexer.js"
-import { Benchmarker } from "../../src/core/utils/common/benchmark.js"
+import { Point } from "@src/core/utils/project/point.js"
+import { PointRepository } from "@src/core/utils/project/point-repository.js"
+import { Indexer } from "@src/core/indexing/indexer.js"
+import { Benchmarker } from "@src/core/utils/common/benchmark.js"
 import { settings } from "../../settings.js"
 
 export class UseIndexer

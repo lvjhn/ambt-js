@@ -2,21 +2,30 @@ import { PointRepository } from "../../../src/core/utils/project/point-repositor
 import { Point } from "../../../src/core/utils/project/point.js";
 
 console.log("Generating points.") 
-const points = Point.randomSet({ count: 300000 }) 
+const points = Point.randomSet({ count: 10000 }) 
 // for(let i in points) {
 //     i = parseInt(i)
 //     console.log(`\t#${i + 1} = ${points[i].toString()}`)
 // }
 
-console.log() 
 
 console.log("Creating point repository.")
 const pointRepository = new PointRepository({ 
-    points : points.filter((x, i) => Math.random() > 0.5), 
-    saveLocation : "./temp/points/custom-points.bin"
+    points, 
+    saveLocation : "./temp/points/custom-points.bin",
+    dims: points[0].dimCount()
 })
 
 await pointRepository.save()
+
+await pointRepository.load({
+    onLoadPoint (chunk, point, index) {
+        console.log(chunk, point)
+    }
+})
+
+
+console.log(`\tSize: ${pointRepository.size()}`) 
 
 console.log() 
 
