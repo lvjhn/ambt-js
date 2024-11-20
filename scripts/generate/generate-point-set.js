@@ -31,11 +31,11 @@ const points = Point.randomSet({ count: POINT_COUNT, dimCount: DIM_COUNT })
 // --- creating point repository --- // 
 console.log("Creating point repository.") 
 const saveLocation = 
-    `${OUTPUT_FOLDER}${SEED}/${SEED}.${DIM_COUNT}.${POINT_COUNT}.bin`
+    `${OUTPUT_FOLDER}r-${SEED}/${DIM_COUNT}.${POINT_COUNT}.bin`
 let pointRepositoryA = new PointRepository({ 
     points: points,
     saveLocation: saveLocation,
-    dimensions : points[0].length
+    dims : points[0].dimCount()
 })
 console.log(`\tSize: ${pointRepositoryA.size()}`)
 
@@ -46,9 +46,10 @@ await pointRepositoryA.save()
 // --- test load point repository --- // 
 console.log("Test loading point repository.")
 const pointRepositoryB = new PointRepository({
-    saveLocation: saveLocation
+    saveLocation: saveLocation,
+    dims: pointRepositoryA.dimCount()
 })
 
 console.log(`\tSize Before Load: ${pointRepositoryB.size()}`)
-await pointRepositoryA.load()
+await pointRepositoryB.load()
 console.log(`\tSize After Load: ${pointRepositoryB.size()}`)

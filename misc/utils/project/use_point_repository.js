@@ -2,7 +2,7 @@ import { PointRepository } from "../../../src/core/utils/project/point-repositor
 import { Point } from "../../../src/core/utils/project/point.js";
 
 console.log("Generating points.") 
-const points = Point.randomSet({ count: 10000 }) 
+const points = Point.randomSet({ count: 1000 }) 
 // for(let i in points) {
 //     i = parseInt(i)
 //     console.log(`\t#${i + 1} = ${points[i].toString()}`)
@@ -10,28 +10,33 @@ const points = Point.randomSet({ count: 10000 })
 
 
 console.log("Creating point repository.")
-const pointRepository = new PointRepository({ 
+const pointRepositoryA = new PointRepository({ 
     points, 
     saveLocation : "./temp/points/custom-points.bin",
     dims: points[0].dimCount()
 })
 
-await pointRepository.save()
+await pointRepositoryA.save()
 
-await pointRepository.load({
+const pointRepositoryB = new PointRepository({ 
+    saveLocation : "./temp/points/custom-points.bin",
+    dims: points[0].dimCount()
+})
+
+await pointRepositoryB.load({
     onLoadPoint (chunk, point, index) {
         console.log(chunk, point)
     }
 })
 
 
-console.log(`\tSize: ${pointRepository.size()}`) 
+console.log(`\tSize: ${pointRepositoryB.size()}`) 
 
 console.log() 
 
 console.log("Normalizing points.")
-console.log(`\tBefore normalization: ${pointRepository.get(0)}`)
+console.log(`\tBefore normalization: ${pointRepositoryB.get(0)}`)
 
-pointRepository.normalize()
+pointRepositoryB.normalize()
 
-console.log(`\tAfter normalization : ${pointRepository.get(0)}`)
+console.log(`\tAfter normalization : ${pointRepositoryB.get(0)}`)

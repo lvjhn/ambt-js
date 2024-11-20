@@ -53,14 +53,7 @@ export class BruteForceNSS extends Indexer
         // --- sort distances --- // 
         state.benchmark.start("sort-distances") 
         state.benchmark.end("sort-distances")
-
-        if(mode == Indexer.NEAREST)
-            distances.sort((a, b) => a.distance - b.distance)
-        else if(mode == Indexer.FARTHEST) 
-            distances.sort((a, b) => b.distance - a.distance)
-        else 
-            throw new Error("Unknown mode.")
-
+        this.sortDistances(state, distances)
         state.benchmark.duration('sort-distances')
         state.benchmarks["sort-distances"] = 
             state.benchmark.duration("sort-distances")
@@ -74,6 +67,11 @@ export class BruteForceNSS extends Indexer
         return state
     }
 
+    /**
+     * Computes the distances between the target point and other points.
+     * @param {Object} state - state object for the query 
+     * @returns 
+     */
     computeDistances(state) {
         // --- extract state --- // 
         const target = state.inputs.target 
@@ -93,6 +91,24 @@ export class BruteForceNSS extends Indexer
         }
 
         return distances
+    }
+
+    /**
+     * Sorts the distances between the poind and other points 
+     * @param {Object} state - state object for the query
+     * @param {number[]} distances - distances between the target and other points  
+     */
+    sortDistances(state, distances) {
+        // --- query mode --- //
+        const mode = state.mode
+
+        // --- sort points based on mode --- //
+        if(mode == Indexer.NEAREST)
+            distances.sort((a, b) => a.distance - b.distance)
+        else if(mode == Indexer.FARTHEST) 
+            distances.sort((a, b) => b.distance - a.distance)
+        else 
+            throw new Error("Unknown mode.")
     }
 
     /** 

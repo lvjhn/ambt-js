@@ -171,7 +171,6 @@ export class PointRepository
                 const point = bytesToArray_float32(chunk)
                 self.points.push(new Point(point))
                 onLoadPoint(chunk, point, i)
-                i += 1
             })
             
             // --- close the file when stream has ended --- //
