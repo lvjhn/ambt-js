@@ -19,19 +19,23 @@ export class UseIndexer
         benchmark.start("create-point-set")
         await this.createPointSet()
         benchmark.end("create-point-set")
-        console.log(`\tDuration: ${benchmark.duration("create-point-set")}`)
+        console.log(`\tCreation Duration: ${benchmark.duration("create-point-set")}`)
 
         // --- build indexer --- // 
         console.log("Building indexer.") 
         benchmark.start("build-indexer")
         await this.buildIndexer() 
         benchmark.end("build-indexer")
-        console.log(`\tDuration: ${benchmark.duration("build-indexer")}`)
+        console.log(`\tBuild Duration: ${benchmark.duration("build-indexer")}`)
 
 
         // --- query indexer --- // 
         console.log("Querying indexer.") 
+        benchmark.start("query-indexer")
         await this.queryIndexer() 
+        benchmark.end("query-indexer")
+        console.log(`\tQuery Duration: ${benchmark.duration("query-indexer")}`)
+
     }
 
     async createPointSet() {
@@ -59,9 +63,12 @@ export class UseIndexer
             count     : pointCount, 
             dimCount  : dimCount
         }) 
+        
 
         // --- create point repository --- //
         this.points = new PointRepository({ points })
+
+        this.points.normalize()
     }
 
     async usePreset() {

@@ -8,8 +8,8 @@ import { indent } from "../utils/common/helpers.js"
 import { Logger } from "../utils/common/logger.js"
 import { euclideanDistance } from "../utils/project/measures.js"
 
-const NEAREST = 0 
-const FARTHEST = 1
+export const NEAREST = 0 
+export const FARTHEST = 1
 
 export class Indexer 
 {
@@ -26,7 +26,7 @@ export class Indexer
     }
 
     /**
-     * TREE CONSTRUCTION METHODS
+     * TREE CONSTRUCTION 
      */
 
     /**
@@ -51,13 +51,13 @@ export class Indexer
 
         // --- construct indexer --- //
         this.logger.verboseLog("Constructing indexer.")
-        this.construct()
+        this.create()
     }
 
     /** 
      * Constructs the indexer, must be implemented by child clsas.
      */
-    construct() {
+    create() {
         this.logger.indent += 1
         this.logger.log("construct() : Must be implemented by child object.")
         this.logger.indent -= 1
@@ -71,7 +71,7 @@ export class Indexer
      * Queries the indexer for a given vector with target k.
      * @param {Point[]} target - the point to query
      * @param {number} k - number of element to return 
-     * @param {mode} mode - whether Indexer.NEAREST or Indexer.FARTHEST
+     * @param {mode} mode - whether"nearest" or"farthest"
      */
     query(target, k, mode = NEAREST) {
         this.logger.indent += 1

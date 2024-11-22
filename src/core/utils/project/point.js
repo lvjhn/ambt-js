@@ -3,11 +3,11 @@
  * --------------------------------------------------------------------------------------
  * Represents a point in 2 dimensional space.
  */
-import { settings } from "../../../../settings.js"
 import { createGenerator, randomFloating } from "../common/random.js"
 import { dotProduct } from "./vectors.js"
 import { euclideanDistance } from "./measures.js"
 import { argMin, argMax } from "../common/helpers.js"
+import { settings } from "../../../../settings.js"
 
 export class Point
 {
@@ -214,4 +214,13 @@ export class Point
 
         return new Point(center)
     }
+
+    /** 
+     * Handle length.
+     */
+    get length() {
+        throw new Error("Use .dimCount() instead for Point objects.")
+    }
+
+    
 } 

@@ -16,13 +16,13 @@ export class BruteForceNNS extends Indexer
     /* --- TREE CONSTRUCTION --- */
     
 
-    construct() {
+    create() {
         return
     }
 
     /* --- TREE QUERIES --- */
 
-    query(target, k, mode = Indexer.NEAREST) {
+    query(target, k, mode ="nearest") {
         // --- create response object --- // 
         const response = {}
 
@@ -102,9 +102,9 @@ export class BruteForceNNS extends Indexer
         const mode = state.inputs.mode
 
         // --- sort points based on mode --- //
-        if(mode == Indexer.NEAREST)
+        if(mode =="nearest")
             distances.sort((a, b) => a.distance - b.distance)
-        else if(mode == Indexer.FARTHEST) 
+        else if(mode =="farthest") 
             distances.sort((a, b) => b.distance - a.distance)
         else 
             throw new Error("Unknown mode.")

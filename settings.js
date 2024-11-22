@@ -1,9 +1,8 @@
 import * as measures from "@src/core/utils/project/measures.js"
-import * as indexer from "@src/core/indexing/indexer.js"
 
 export const settings = {
     random : {
-        defaultSeed : 1234567890
+        defaultSeed : 123456789
     },
     indexers : {
         points : {
@@ -11,8 +10,8 @@ export const settings = {
 
             // --- generation mode --- // 
             generate : {
-                pointCount : 100,
-                dimCount : 300, 
+                pointCount : 10000,
+                dimCount : 2, 
             },
 
             // --- presets mode --- //
@@ -22,11 +21,11 @@ export const settings = {
             } 
           
         },
-        measure : measures.cosineDistance, 
+        measure : measures.euclideanDistance, 
         query: {
             target : 50, 
             k : 10, 
-            mode : indexer.NEAREST
+            mode : "nearest"
         }
     }
 }

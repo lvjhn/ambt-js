@@ -23,13 +23,9 @@ export class PointRepository
      */
     constructor({
         points       = [],
-        saveLocation = `./temp/points/${currentTime()}`,
         dims         = null,
         DataClass    = null 
     } = {}) {     
-        // --- save location of the repository --- // 
-        this.saveLocation = saveLocation 
-
         // --- no. of dimensions --- // 
         this.dims   = dims
 
@@ -89,24 +85,19 @@ export class PointRepository
      * Saves the point repository in binary format.
      * (Does not work in browser, must manually save points).
      * 
-     * @param {Object} options - options object 
-     * @param {Function} options.onFileCreated 
-     *  called when the savefile has been created 
-     * @param {Function} options.onSavePoint 
-     *  called when a point has been appended to the savefile
-     * @param {Function} options.onBeforeClose 
-     *  called before closing the savefile
+     * @param {string} saveLocation - where to save 
+     * 
      */
-    async save() {
+    async save(saveLocation) {
         const self = this 
 
         return new Promise(async (resolve, reject) => { 
             // --- save point values --- //
-            await this.savePointValues() 
+            await this.savePointValues(saveLocation) 
 
             // --- save point data --- //
             if(self.DataClass != null) {
-                await this.savePointData() 
+                await this.savePointData(saveLocation) 
             }
 
             resolve(true)
@@ -115,16 +106,15 @@ export class PointRepository
 
     /** 
      * Saves point values.
+     * 
+     * @param {string} saveLocation - where to save 
      */
-    async savePointValues() {
+    async savePointValues(saveLocation) {
         const self = this 
 
         return new Promise(async (resolve, reject) => {
             // --- import file system (doesn't work in the browser) --- //
             const fs = (await import("fs")).default 
-
-            // --- save location --- // 
-            const saveLocation = self.saveLocation
 
             // --- check if directory exists --- // 
             const baseFolder_ = baseFolder(saveLocation) 
@@ -151,8 +141,7 @@ export class PointRepository
     /** 
      * Gets location of data file. 
      */
-    dataFileLocation() {
-        const saveLocation      = this.saveLocation
+    dataFileLocation(saveLocation) {
         const baseFolder_       = baseFolder(saveLocation)
         const fileName_         = replaceExtension(
             fileName(saveLocation), 
@@ -165,8 +154,10 @@ export class PointRepository
 
     /** 
      * Saves point data. 
+     * 
+     * @param {string} saveLocation - where to save 
      */
-    async savePointData () {
+    async savePointData (saveLocation) {
         const self = this 
 
         return new Promise(async (resolve, reject) => {
@@ -174,9 +165,6 @@ export class PointRepository
 
             // --- JSON container for point data --- // 
             const json = []
-
-            // --- save location --- // 
-            const saveLocation = this.saveLocation
 
             // --- points --- // 
             const points = self.points
@@ -197,7 +185,7 @@ export class PointRepository
             const jsonStr = JSON.stringify(json) 
 
             // --- get location of data file --- // 
-            const dataFileLocation = this.dataFileLocation()
+            const dataFileLocation = this.dataFileLocation(saveLocation)
             
             // --- save data file --- // 
             fs.writeFileSync(dataFileLocation, jsonStr)
@@ -210,24 +198,18 @@ export class PointRepository
      * Loads the point repository in binary format.
      * (Does not work in browser, must manually save points).
      * 
-     * @param {Object} options - options object 
-     * @param {Function} options.onFileOpened 
-     *  called when the savefile has been opened 
-     * @param {Function} options.onLoadPoint 
-     *  called when a point has been loaded 
-     * @param {Function} options.onBeforeClose 
-     *  called before closing the savefile
+     * @param {string} saveLocation - where to load
      */
-    async load() {
+    async load(saveLocation) {
         const self = this 
 
         return new Promise(async (resolve, reject) =>  {
             // --- load point values -- // 
-            await this.loadPointValues() 
+            await this.loadPointValues(saveLocation) 
             
             // --- load point data --- //
             if(self.DataClass != null) {
-                await this.loadPointData() 
+                await this.loadPointData(saveLocation) 
             }
 
             resolve(true)
@@ -235,9 +217,11 @@ export class PointRepository
     }
 
     /**
-     * Loads point values.
+     * Loads point values. 
+     * 
+     * @param {string} saveLocation - where to load
      */
-    async loadPointValues() {
+    async loadPointValues(saveLocation) {
         const self = this 
 
         return new Promise(async (resolve, reject) => {
@@ -245,9 +229,6 @@ export class PointRepository
 
             // --- import file system (doesn't work in the browser) --- //
             const fs = (await import("fs")).default 
-
-            // --- save location --- // 
-            const saveLocation = self.saveLocation
 
             // --- load input file as input stream --- //
             const chunkSize = 4 * self.dimCount()
@@ -281,8 +262,10 @@ export class PointRepository
 
     /**
      * Loads point data.
+     * 
+     * @param {string} saveLocation - where to load
      */
-    async loadPointData() {
+    async loadPointData(saveLocation) {
         const self = this 
         
         return new Promise(async (resolve, reject) => {
@@ -290,7 +273,7 @@ export class PointRepository
             const fs = (await import("fs")).default
 
             // --- data file location --- // 
-            const dataFileLocation = self.dataFileLocation()
+            const dataFileLocation = self.dataFileLocation(saveLocation)
             
             // --- load data file --- // 
             const data = JSON.parse(fs.readFileSync(dataFileLocation))
@@ -336,5 +319,14 @@ export class PointRepository
      */
     all() {
         return this.points
+    }
+
+    /** 
+     * Adds a point to the repository. 
+     * 
+     * @param {Point} point - point to add
+     */
+    add(point) {
+        this.points.push(point)
     }
 }

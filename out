@@ -1,0 +1,362 @@
+Creating points set.
+Generating random points.
+	Duration: 0.002535285
+Building indexer.
+    Setting points.
+    Constructing indexer.
+    Creating indexer.
+3
+2
+4
+1
+7
+6
+8
+5
+0
+<ref *1> [
+  BTLeafSingle {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    pointId: 1
+  },
+  BTLeafSingle {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    pointId: 3
+  },
+  BTInternalNode {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    centroidId: undefined,
+    radius: 6.259075435917034,
+    children: [ null, null ]
+  },
+  BTLeafSingle {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    pointId: 5
+  },
+  BTInternalNode {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    centroidId: undefined,
+    radius: 6.896403666082456,
+    children: [ 2, null ]
+  },
+  BTLeafSingle {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    pointId: 8
+  },
+  BTLeafSingle {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    pointId: 9
+  },
+  BTInternalNode {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    centroidId: undefined,
+    radius: 2.6386630880997295,
+    children: [ null, null ]
+  },
+  BTInternalNode {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    centroidId: undefined,
+    radius: 9.043179672593043,
+    children: [ 4, 7 ]
+  },
+  BTLeafSingle {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    pointId: 4
+  },
+  BTLeafSingle {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    pointId: 7
+  },
+  BTInternalNode {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    centroidId: undefined,
+    radius: 5.489493055374057,
+    children: [ null, null ]
+  },
+  BTLeafSingle {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    pointId: 2
+  },
+  BTInternalNode {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    centroidId: undefined,
+    radius: 9.90776404734074,
+    children: [ 11, null ]
+  },
+  BTLeafSingle {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    pointId: 0
+  },
+  BTLeafSingle {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    pointId: 6
+  },
+  BTInternalNode {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    centroidId: undefined,
+    radius: 6.968869378349692,
+    children: [ null, null ]
+  },
+  BTInternalNode {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    centroidId: undefined,
+    radius: 11.02281170839818,
+    children: [ 13, 16 ]
+  },
+  BTInternalNode {
+    tree: BallTree {
+      measure: [Function: cosineDistance],
+      logger: [Logger],
+      threshold: 1,
+      branching: [Function (anonymous)],
+      nodes: [Circular *1],
+      rootNodeId: 18,
+      centroids: [Array],
+      splitter: 'max-spread-axis',
+      splitters: [Object],
+      splitterObj: [BTMaxSpreadAxisSplitter],
+      treeInfo: {},
+      points: [PointRepository]
+    },
+    centroidId: undefined,
+    radius: 10.927551843523782,
+    children: [ 8, 17 ]
+  }
+]
+	Duration: 0.007829454
+Querying indexer.
+undefined

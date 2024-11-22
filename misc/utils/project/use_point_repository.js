@@ -32,20 +32,18 @@ for(let i in points) {
 console.log("Creating point repository.")
 const pointRepositoryA = new PointRepository({ 
     points, 
-    saveLocation : "./temp/points/custom-points.bin",
     dims: points[0].dimCount(), 
     DataClass : PointData
 })
 
-await pointRepositoryA.save()
+await pointRepositoryA.save("./temp/points/custom-points.bin")
 
 const pointRepositoryB = new PointRepository({ 
-    saveLocation : "./temp/points/custom-points.bin",
     dims: points[0].dimCount(),
     DataClass : PointData
 })
 
-await pointRepositoryB.load()
+await pointRepositoryB.load("./temp/points/custom-points.bin")
 
 
 console.log(`\tSize: ${pointRepositoryB.size()}`) 
