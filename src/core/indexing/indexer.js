@@ -8,11 +8,11 @@ import { indent } from "../utils/common/helpers.js"
 import { Logger } from "../utils/common/logger.js"
 import { euclideanDistance } from "../utils/project/measures.js"
 
+const NEAREST = 0 
+const FARTHEST = 1
+
 export class Indexer 
 {
-    static NEAREST  = 0 
-    static FARTHEST = 1
-
     /**
      * @param {Object} options - options object 
      * @param {Function} options.measure - measurement/metric function to use
@@ -73,7 +73,7 @@ export class Indexer
      * @param {number} k - number of element to return 
      * @param {mode} mode - whether Indexer.NEAREST or Indexer.FARTHEST
      */
-    query(target, k, mode = Indexer.NEAREST) {
+    query(target, k, mode = NEAREST) {
         this.logger.indent += 1
         this.logger.log("query() : Must be implemented by child object.")
         this.logger.indent -= 1

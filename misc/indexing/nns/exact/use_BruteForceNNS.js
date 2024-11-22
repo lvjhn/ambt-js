@@ -4,12 +4,12 @@ import { settings } from "../../../../settings.js";
 
 const indexer = new UseIndexer()
 
-indexer.buildIndexer = function () {
+indexer.buildIndexer = async function () {
     const nns = new BruteForceNNS({
         measure: settings.indexers.measure
     })
-    nns.build(this.points)
+    await nns.build(this.points)
     this.indexer = nns
 }
 
-indexer.start()
+await indexer.start()

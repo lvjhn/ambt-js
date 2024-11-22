@@ -99,7 +99,7 @@ export class BruteForceNNS extends Indexer
      */
     sortDistances(state, distances) {
         // --- query mode --- //
-        const mode = state.mode
+        const mode = state.inputs.mode
 
         // --- sort points based on mode --- //
         if(mode == Indexer.NEAREST)

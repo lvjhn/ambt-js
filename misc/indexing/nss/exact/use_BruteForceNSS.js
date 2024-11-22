@@ -15,7 +15,7 @@ class PointData
     }
 }
 
-indexer.buildIndexer = function () {
+indexer.buildIndexer = async function () {
     // --- set radii of points --- // 
     const generator = createGenerator(settings.random.defaultSeed)
     for(let point of this.points.all()) {
@@ -31,8 +31,8 @@ indexer.buildIndexer = function () {
     const nns = new BruteForceNSS({
         measure: settings.indexers.measure
     })
-    nns.build(this.points)
+    await nns.build(this.points)
     this.indexer = nns
 }
 
-indexer.start()
+await indexer.start()
