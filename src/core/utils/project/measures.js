@@ -14,6 +14,7 @@ import { cosineSimilarity } from "./vectors.js"
  */
 export function euclideanDistance(A, B) {
     let total = 0 
+    
     for(let i = 0; i < A.dimCount(); i++) {
         const AB = A.at(i) - B.at(i)
         const ABAB = AB * AB

@@ -6,7 +6,7 @@
 import { createGenerator, randomFloating } from "../common/random.js"
 import { dotProduct } from "./vectors.js"
 import { euclideanDistance } from "./measures.js"
-import { argMin, argMax } from "../common/helpers.js"
+import { argMin, argMax, maximum, minimum } from "../common/helpers.js"
 import { settings } from "../../../../settings.js"
 
 export class Point
@@ -19,12 +19,12 @@ export class Point
     /**
      * Minimum number to generate for a point.
      */
-    static generateMin = -10 
+    static generateMin = -100
 
     /** 
      * Maximum number to generate for a point.
      */
-    static generateMax = 10
+    static generateMax = 100
 
     /** 
      * Collection of all points. 
@@ -141,7 +141,7 @@ export class Point
      */
     static projectToLine(A, B, C) {
         const AB = new Point(A.dims().map((_, i) => B.at(i) - A.at(i)))
-        const AC = new Point(A.dims().map((_, i) => C.at(i) - A.at(i)))
+        const AC = new Point(C.dims().map((_, i) => C.at(i) - A.at(i)))
 
         const DP_ACAB = dotProduct(AC, AB) 
         const DP_ABAB = dotProduct(AB, AB) 
@@ -168,7 +168,7 @@ export class Point
         let distances = 
             pointSet.map((otherPoint) => measureFn(this, otherPoint))
         let index = argMax(distances)
-        let distance = Math.max(...distances)
+        let distance = maximum(distances)
         return { index, distance }
     }
 
@@ -183,7 +183,7 @@ export class Point
         let distances = 
             pointSet.map((otherPoint) => measureFn(this, otherPoint))
         let index = argMin(distances)
-        let distance = Math.min(...distances)
+        let distance = minimum(...distances)
         return { index, distance }
     }
 

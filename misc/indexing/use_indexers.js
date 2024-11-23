@@ -68,7 +68,9 @@ export class UseIndexer
         // --- create point repository --- //
         this.points = new PointRepository({ points })
 
-        this.points.normalize()
+        if(settings.indexers.normalize) {
+            this.points.normalize()
+        }
     }
 
     async usePreset() {
@@ -108,5 +110,9 @@ export class UseIndexer
 
         // --- display results --- //
         console.log(results)
+
+        if(settings.indexers.normalize) {
+            this.points.normalize()
+        }
     }
 }

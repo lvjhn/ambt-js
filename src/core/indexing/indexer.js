@@ -59,7 +59,7 @@ export class Indexer
      */
     create() {
         this.logger.indent += 1
-        this.logger.log("construct() : Must be implemented by child object.")
+        this.logger.log("create() : Must be implemented by child object.")
         this.logger.indent -= 1
     }
 

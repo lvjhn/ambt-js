@@ -16,16 +16,13 @@ export class BruteForceNSS extends Indexer
     /* --- TREE CONSTRUCTION --- */
     
 
-    construct() {
+    create() {
         return
     }
 
     /* --- TREE QUERIES --- */
 
-    query(target, k, mode = ) {
-        // --- create response object --- // 
-        const response = {}
-
+    query(target, k, mode = "nearest") {
         // --- create state object --- // 
         const state = {}
         state.benchmarks = {}

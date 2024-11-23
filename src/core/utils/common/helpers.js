@@ -11,7 +11,15 @@
  * @returns {number} - index (first one) of the minimum value in the array
  */
 export function argMin(values) {
-    return values.indexOf(Math.min(...values))
+    let minIndex = null 
+    let minValue = Infinity 
+    for(let i = 0; i < values.length; i++) {
+        if(values[i] < minValue) {
+            minIndex = i 
+            minValue = values[i]
+        }
+    }
+    return minIndex
 }
 
 /**
@@ -21,7 +29,48 @@ export function argMin(values) {
  * @returns {number} - index (first one) of the maximum value in the array
  */
 export function argMax(values) {
-    return values.indexOf(Math.max(...values))
+    let maxIndex = null 
+    let maxValue = -Infinity 
+    for(let i = 0; i < values.length; i++) {
+        if(values[i] > maxValue) {
+            maxIndex = i 
+            maxValue = values[i]
+        }
+    }
+    return maxIndex
+}
+
+
+/**
+ * Gets the minimum value in a given array.
+ * 
+ * @param {any[]} values 
+ * @returns {number}
+ */
+export function minimum(values) {
+    let minValue = Infinity 
+    for(let i = 0; i < values.length; i++) {
+        if(values[i] < minValue) {
+            minDistance = values[i]
+        }
+    }
+    return minValue
+}
+
+/**
+ * Gets the maximum value in a given array.
+ * 
+ * @param {any[]} values - value to consider
+ * @returns {number} 
+ */
+export function maximum(values) {
+    let maxValue = -Infinity 
+    for(let i = 0; i < values.length; i++) {
+        if(values[i] > maxValue) {
+            maxValue = values[i]
+        }
+    }
+    return maxValue
 }
 
 /** 

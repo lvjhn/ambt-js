@@ -21,9 +21,10 @@ export const settings = {
             } 
           
         },
+        normalize: false,
         measure : measures.euclideanDistance, 
         query: {
-            target : 50, 
+            target : 60, 
             k : 10, 
             mode : "nearest"
         }

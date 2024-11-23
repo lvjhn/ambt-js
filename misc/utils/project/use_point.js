@@ -58,7 +58,7 @@ console.log(`\tPoint Set:`)
 for(let i in pointSetB) {
     console.log(`\t\t#${i} = ${pointSetB[i].toString()}`)
 } 
-console.log(`\tNearest Point: #${keyPointB.nerastFrom(pointSetB).index + 1}`)
+console.log(`\tNearest Point: #${keyPointB.nearestFrom(pointSetB).index + 1}`)
 
 
 console.log()

@@ -32,14 +32,14 @@ indexer.buildIndexer = async function () {
     const nns = new BallTree({
         measure: settings.indexers.measure, 
         threshold : 1, 
-        branching: (c, d) => 2
+        branching: (c, d) => 2,
+        splitter: "projection"
     })
 
     await nns.build(this.points)
     this.indexer = nns
 
     console.log(nns.treeInfo)
-
 }
 
 await indexer.start()
